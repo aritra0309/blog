@@ -3,6 +3,7 @@ const path = require('path');
 const matter = require('gray-matter');
 const { marked } = require('marked');
 const crypto = require('crypto');
+const katex = require('katex');
 
 const POSTS_DIR = path.join(__dirname, 'posts');
 const SITE_DIR = path.join(__dirname, 'site');
@@ -20,6 +21,28 @@ function readTime(text) {
 function formatDate(value) {
   if (value instanceof Date) return value.toISOString().slice(0, 10);
   return String(value);
+}
+
+function renderMath(content) {
+  const mathBlocks = [];
+
+  let processed = content.replace(/\$\$([\s\S]+?)\$\$/g, (_, expr) => {
+    const html = katex.renderToString(expr.trim(), { throwOnError: false, displayMode: true });
+    mathBlocks.push(html);
+    return `@@MATH_${mathBlocks.length - 1}@@`;
+  });
+
+  processed = processed.replace(/\$([^\$\n]+?)\$/g, (_, expr) => {
+    const html = katex.renderToString(expr.trim(), { throwOnError: false, displayMode: false });
+    mathBlocks.push(html);
+    return `@@MATH_${mathBlocks.length - 1}@@`;
+  });
+
+  return { processed, mathBlocks };
+}
+
+function restoreMath(html, mathBlocks) {
+  return html.replace(/@@MATH_(\d+)@@/g, (_, i) => mathBlocks[Number(i)]);
 }
 
 function loadPosts() {
@@ -42,7 +65,10 @@ function loadPosts() {
       tags: data.tags || [],
       excerpt: data.excerpt || '',
       readTime: readTime(content),
-      bodyHtml: marked.parse(content),
+      bodyHtml: (() => {
+        const { processed, mathBlocks } = renderMath(content);
+        return restoreMath(marked.parse(processed), mathBlocks);
+      })(),
       url: `posts/${slug}.html`,
     };
   });

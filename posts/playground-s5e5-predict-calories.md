@@ -1,5 +1,5 @@
 ---
-title: "Playground Series — A First Attempt"
+title: "Playground Series — s5e5 Predict Calorie Expenditure"
 date: 2026-07-31
 category: kaggle
 tags: [kaggle, competition, regression, xgboost]
@@ -17,7 +17,7 @@ Two things stood out immediately. First, an ID column, useless for modeling, alo
 
 ## Looking before leaping
 
-Technically you can go build a model right after that. I didn't want to yet. I plotted a correlation map first, mostly out of curiosity, and found two patterns worth noting: a strong relationship between Duration, Heart_Rate, Body_Temp, and Calories, and a separate one between Height and Weight.
+Technically you can go build a model right after that. I didn't want to yet. I plotted a correlation map first, mostly out of curiosity, and found two patterns worth noting: a strong relationship between Duration, Heart_Rate, Body_Temp, and Calories, and a separate one between Height and Weight with respect to Gender.
 
 ![correlation heatmap](../images/correlation-heatmap.png)
 
@@ -45,7 +45,6 @@ This got me the results I was after, but it came with a warning in the cell outp
 
 Some digging (with help from the internet and Nvidia's own docs) introduced me to CuPy, which does array computations, the kind you'd normally do in NumPy, directly on an Nvidia GPU. That fixed it.
 
-![cupy fix](../images/cupy-fix.png)
 
 ## Where the score landed
 
@@ -63,6 +62,8 @@ $$
 \log(1+y_i)
 \right)^2
 }
+
+$$
 
 My final score came out to **0.0579**. Not a leaderboard-topping number, but a real improvement over my very first attempt with plain linear regression, which scored **0.57**. An order of magnitude better, even if it's nowhere near where a tuned ensemble could take it.
 
