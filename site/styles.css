@@ -131,6 +131,12 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--space-3) va
 
 .post-body { font-size: 16px; }
 .post-body pre { background: #F1EFE7; padding: var(--space-3); overflow-x: auto; border-radius: var(--radius); }
+.post-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  margin: var(--space-4) 0;
+}
 
 .related { margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--line); }
 .related ul { list-style: none; padding: 0; }

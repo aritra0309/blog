@@ -77,6 +77,11 @@ function main() {
   fs.copyFileSync(path.join(SITE_DIR, 'app.js'), path.join(DIST_DIR, 'app.js'));
   fs.copyFileSync(path.join(SITE_DIR, 'index.html'), path.join(DIST_DIR, 'index.html'));
 
+  const imagesDir = path.join(SITE_DIR, 'images');
+  if (fs.existsSync(imagesDir)) {
+    fs.cpSync(imagesDir, path.join(DIST_DIR, 'images'), { recursive: true });
+  }
+
   const postTemplate = fs.readFileSync(path.join(SITE_DIR, 'post-template.html'), 'utf8');
   posts.forEach((post) => {
     const html = renderTemplate(postTemplate, {
