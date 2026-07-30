@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <h1 class="site-title">project log</h1>
+  <input id="search" type="search" placeholder="search entries…" aria-label="Search entries">
+</header>
+
+<nav id="categoryPills" class="pills" aria-label="Filter by category"></nav>
+
+<main>
+  <ul id="entries" class="entries"></ul>
+  <p id="emptyState" class="empty-state" hidden>No entries match — try a different search or category.</p>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

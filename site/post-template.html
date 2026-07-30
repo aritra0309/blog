@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a href="../index.html" class="back-link">← back to log</a>
+
+<article class="post">
+  <header class="post-header">
+    <span class="meta"><span class="dot"></span>{{category}} · {{date}} · {{readTime}} min read</span>
+    <h1>{{title}}</h1>
+  </header>
+  <div class="post-body">
+    {{body}}
+  </div>
+</article>
+
+{{relatedEntries}}
+
+</body>
+</html>
