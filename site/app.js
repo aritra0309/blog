@@ -72,7 +72,7 @@ function renderEntries() {
 }
 
 async function init() {
-  const res = await fetch('posts.json');
+  const res = await fetch('posts.json', { cache: 'no-store' });
   allPosts = await res.json();
 
   const categories = [...new Set(allPosts.map((p) => p.category))];
